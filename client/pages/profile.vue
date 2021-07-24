@@ -21,7 +21,11 @@
         </div>
       </div>
 
-      <c-button title="Login" type="submit" :loading="loading" :disabled="loading" />
+      <div class="mb-3">
+        <nuxt-link :to="{ name: 'delete' }">Delete Account</nuxt-link>
+      </div>
+
+      <c-button title="Update Profile" type="submit" :loading="loading" :disabled="loading" />
     </form>
   </div>
 </template>

@@ -27,6 +27,7 @@ return [
         'forgot-password',
         'two-factor-challenge',
         'user/password',
+        'user/confirm-password',
         'user/profile-information',
         'user/two-factor-authentication',
         'user/two-factor-recovery-codes',

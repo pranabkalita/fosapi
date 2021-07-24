@@ -15,7 +15,20 @@ return [
     |
     */
 
-    'paths' => ['api/*', 'sanctum/csrf-cookie'],
+    'paths' => [
+        'api/*',
+        'sanctum/csrf-cookie',
+
+        // All POST/PATCH/PUT routers from Fortify
+        'login',
+        'logout',
+        'reset-password',
+        'two-factor-challenge',
+        'user/password',
+        'user/profile-information',
+        'user/two-factor-authentication',
+        'user/two-factor-recovery-codes'
+    ],
 
     'allowed_methods' => ['*'],
 

@@ -4,14 +4,14 @@
       <li><nuxt-link :to="{ name: 'home' }" class="px-2">Home</nuxt-link></li>
 
       <template v-if="$auth.loggedIn">
-        <li><nuxt-link :to="{ name: 'home' }" class="px-2">{{ $auth.user.name }}</nuxt-link></li>
+        <li><nuxt-link :to="{ name: 'profile' }" class="px-2">{{ $auth.user.name }}</nuxt-link></li>
         <li><nuxt-link :to="{ name: 'home' }" class="px-2">Dashboard</nuxt-link></li>
         <li><a href="#" @click.prevent="logout" class="px-2">Logout</a></li>
       </template>
 
       <template v-if="!$auth.loggedIn">
         <li><nuxt-link :to="{ name: 'login' }" class="px-2">Login</nuxt-link></li>
-        <li><nuxt-link :to="{ name: 'login' }" class="px-2">Register</nuxt-link></li>
+        <li><nuxt-link :to="{ name: 'register' }" class="px-2">Register</nuxt-link></li>
       </template>
     </ul>
   </header>

@@ -21,6 +21,7 @@ return [
 
         // All POST/PATCH/PUT routers from Fortify
         'login',
+        'register',
         'logout',
         'reset-password',
         'two-factor-challenge',

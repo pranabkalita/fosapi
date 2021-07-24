@@ -28,7 +28,8 @@ return [
         'user/password',
         'user/profile-information',
         'user/two-factor-authentication',
-        'user/two-factor-recovery-codes'
+        'user/two-factor-recovery-codes',
+        'email/verification-notification'
     ],
 
     'allowed_methods' => ['*'],

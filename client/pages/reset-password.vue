@@ -1,6 +1,6 @@
 <template>
   <div class="w-10/12 md:w-6/12 mx-auto">
-    <form action="" @submit.prevent='login' class="mb-8">
+    <form action="" @submit.prevent='resetPassword' class="mb-8">
       <div class="mb-6">
         <div class="mb-3">
           <label for="email" class="inline-block text-sm mb-2">Email</label>
@@ -13,7 +13,7 @@
 
         <div class="mb-3">
           <label for="password" class="inline-block text-sm mb-2">Password</label>
-          <input type="password" id="password" v-model="form.password" class="w-full border-2 border-gray-200 h-10 px-3 rounded-md" :class="{ 'border-red-500': errors.email }">
+          <input type="password" id="password" v-model="form.password" class="w-full border-2 border-gray-200 h-10 px-3 rounded-md" :class="{ 'border-red-500': errors.password }">
 
           <div v-if="errors.password" class="text-red-500 text-sm mt-2">
             {{ errors.password[0] }}
@@ -21,17 +21,17 @@
         </div>
 
         <div class="mb-3">
-          <nuxt-link :to="{ name: 'forgot-password' }">Forgot your password ?</nuxt-link>
+          <label for="password_confirmation" class="inline-block text-sm mb-2">Password confirmation</label>
+          <input type="password" id="password_confirmation" v-model="form.password_confirmation" class="w-full border-2 border-gray-200 h-10 px-3 rounded-md" :class="{ 'border-red-500': errors.password_confirmation }">
+
+          <div v-if="errors.password_confirmation" class="text-red-500 text-sm mt-2">
+            {{ errors.password_confirmation[0] }}
+          </div>
         </div>
       </div>
 
-      <c-button title="Login" type="submit" :loading="loading" :disabled="loading" />
+      <c-button title="Change Password" type="submit" :loading="loading" :disabled="loading" />
     </form>
-
-    <p class="text-sm text-gray-800">
-      Not joined yet ?
-      <router-link :to="{ name: 'register' }" class="text-indigo-500">Create an account</router-link>
-    </p>
   </div>
 </template>
 
@@ -40,8 +40,10 @@ export default {
   data() {
     return {
       form: {
-        email: '',
-        password: ''
+        email: this.$route.query.email || '',
+        password: '',
+        password_confirmation: '',
+        token: this.$route.query.token || ''
       },
 
       loading: false,
@@ -49,13 +51,14 @@ export default {
     }
   },
   methods: {
-    async login(){
+    async resetPassword(){
       try {
         this.loading = true
-        await this.$auth.loginWith('laravelSanctum', {
-          data: this.form
-        })
+        await this.$axios.get('sanctum/csrf-cookie')
+        await this.$axios.post('reset-password', this.form)
+
         this.loading = false
+        this.$router.replace({ name: 'login' })
       } catch (e) {
         this.loading = false
         if (e.response.status === 422) {

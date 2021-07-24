@@ -24,6 +24,7 @@ return [
         'register',
         'logout',
         'reset-password',
+        'forgot-password',
         'two-factor-challenge',
         'user/password',
         'user/profile-information',
